@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartBrief</title>
+  <link rel="stylesheet" href="styles/briefing.css">
+  
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Tela inicial -->
+  <div id="start">
+    <h2>SmartBrief</h2>
+    <p>Responda algumas perguntas rápidas para criarmos seu briefing.</p>
+    <button id="startBtn">Começar</button>
+  </div>
+
+  <!-- Formulário -->
+  <div id="form" class="hidden">
+    <h2>Briefing</h2>
+
+    <label>Objetivo:</label>
+    <select id="goal">
+      <option value="">Selecione</option>
+      <option>Vendas</option>
+      <option>Engajamento</option>
+      <option>Branding</option>
+    </select>
+
+    <label>Produto ou serviço:</label>
+    <input type="text" id="product">
+
+    <label>Público-alvo:</label>
+    <input type="text" id="audience">
+
+    <label>Prazo:</label>
+    <input type="date" id="deadline">
+
+    <label>Observações:</label>
+    <textarea id="notes"></textarea>
+
+    <button id="generateSummaryBtn">Gerar resumo</button>
+  </div>
+
+  <!-- Resumo -->
+  <div id="summary" class="hidden">
+    <h2>Resumo do Briefing</h2>
+    <div class="summary" id="summaryText"></div>
+
+    <p>Isso está correto?</p>
+    <button id="confirmBtn">Sim</button>
+    <button class="secondary" id="editBtn">Não</button>
+  </div>
+
+  <!-- Final -->
+  <div id="final" class="hidden">
+    <h2>✅ Briefing confirmado!</h2>
+    <p>Seu briefing foi estruturado com sucesso.</p>
+  </div>
+
+</div>
+
+<script type="module" src="script/briefing.js"></script>
+
+</body>
+</html>
