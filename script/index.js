@@ -9,6 +9,11 @@ const generateLinkBtn = document.getElementById("generateLink");
 const toggleBtn = document.getElementById("toggleFilters");
 const filtersDiv = document.getElementById("filters");
 
+
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
 toggleBtn.onclick = () => {
   if (filtersDiv.classList.contains("hidden")) {
     filtersDiv.classList.remove("hidden");
@@ -27,13 +32,6 @@ function formatDate(dateStr) {
   return `${d}/${m}/${y}`;
 }
 
-function showView(viewId) {
-  document.getElementById("homeView").classList.add("hidden");
-  document.getElementById("detailsView").classList.add("hidden");
-
-  document.getElementById(viewId).classList.remove("hidden");
-}
-
 function checkInputs() {
    generateLinkBtn.disabled = !(clientInput.value.trim() && responsibleInput.value.trim());
 }
@@ -42,7 +40,10 @@ clientInput.addEventListener("input", checkInputs);
 responsibleInput.addEventListener("input", checkInputs);
 
 async function openDetails(id) {
-  showView("detailsView");
+  if (isMobile()) {
+    document.querySelector(".list-section").classList.add("hidden");
+    document.querySelector(".details-section").classList.remove("hidden");
+  }
 
   const docRef = doc(db, "briefings", id, "details", "main");
   const docSnap = await getDoc(docRef);
@@ -55,32 +56,41 @@ async function openDetails(id) {
     return;
   } else if (docSnap.exists()) {
     document.getElementById("detailsContent").innerHTML = `
-      <h2>Detalhes do Briefing</h2>
+      <div class="details-wrapper">
+        <h2 class="section-title">Detalhes do Briefing</h2>
 
-      <table class="briefing-table">
-        <tr>
-          <th>Campo</th>
-          <th>Valor</th>
-        </tr>
+        <table class="briefing-table">
+          <tr>
+            <th>Campo</th>
+            <th>Valor</th>
+          </tr>
 
-        <tr><td>Produto</td><td>${data.product || "-"}</td></tr>
-        <tr><td>Objetivo</td><td>${data.goal || "-"}</td></tr>
-        <tr><td>KPI</td><td>${data.kpi || "-"}</td></tr>
-        <tr><td>Público</td><td>${data.audience || "-"}</td></tr>
-        <tr><td>Idade</td><td>${data.age || "-"}</td></tr>
-        <tr><td>Localização</td><td>${data.location || "-"}</td></tr>
-        <tr><td>Prazo</td><td>${formatDate(data.deadline)}</td></tr>
-        <tr><td>Descrição</td><td>${data.description || "-"}</td></tr>
-        <tr><td>Referências</td><td>${data.references || "-"}</td></tr>
-        <tr><td>Observações</td><td>${data.notes || "-"}</td></tr>
-        <tr><td>Criado em</td><td>${new Date(data.createdAt).toLocaleString()}</td></tr>
-      </table>
-    `;
+          <tr><td>Produto</td><td>${data.product || "-"}</td></tr>
+          <tr><td>Objetivo</td><td>${data.goal || "-"}</td></tr>
+          <tr><td>KPI</td><td>${data.kpi || "-"}</td></tr>
+          <tr><td>Público</td><td>${data.audience || "-"}</td></tr>
+          <tr><td>Idade</td><td>${data.age || "-"}</td></tr>
+          <tr><td>Localização</td><td>${data.location || "-"}</td></tr>
+          <tr><td>Prazo</td><td>${formatDate(data.deadline)}</td></tr>
+          <tr><td>Descrição</td><td>${data.description || "-"}</td></tr>
+          <tr><td>Referências</td><td>${data.references || "-"}</td></tr>
+          <tr><td>Observações</td><td>${data.notes || "-"}</td></tr>
+          <tr><td>Criado em</td><td>${new Date(data.createdAt).toLocaleString()}</td></tr>
+        </table>
+      </div>
+      `;
+
+    if (!isMobile()) {
+      document.getElementById("backBtn").classList.add("hidden");
+    } else {
+      document.getElementById("backBtn").classList.remove("hidden");
+    }
   }
 }
 
 document.getElementById("backBtn").onclick = () => {
-  showView("homeView");
+  document.querySelector(".list-section").classList.remove("hidden");
+  document.querySelector(".details-section").classList.add("hidden");
 };
 
 let allBriefings = [];
@@ -262,3 +272,15 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
+
+function initLayout() {
+  if (isMobile()) {
+    document.querySelector(".details-section").classList.add("hidden");
+  } else {
+    document.querySelector(".details-section").classList.remove("hidden");
+    document.querySelector(".list-section").classList.remove("hidden");
+  }
+}
+
+window.addEventListener("load", initLayout);
+window.addEventListener("resize", initLayout);

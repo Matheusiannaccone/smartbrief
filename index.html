@@ -9,8 +9,11 @@
 </head>
 <body>
 <div id="app">
+  <div class="container">
   <!-- HOME -->
    <div id="homeView">
+
+    <!-- Gerador de link -->
      <div class="box">
        <h2>Gerar Link de Briefing</h2>
 
@@ -29,7 +32,6 @@
        <input type="text" id="link" readonly>
        <button id="copyLink">Copiar Link</button>
        
-       <h3 class="section-title">Briefings Recebidos</h3>
        <h3 class="section-title">
           <button id="toggleFilters" class="filter-toggle">Filtros ▼</button>
         </h3>
@@ -56,14 +58,28 @@
           <button id="applyFilters">Aplicar Filtros</button>
           <button id="clearFilters">Limpar Filtros</button>
         </div>
-       <div id="list"></div>
      </div>
    </div>
 
-   <div id="detailsView" class="hidden">
-    <button id="backBtn">Voltar</button>
-    <div id="detailsContent"></div>
+   <!-- Conteúdo Principal -->
+   <div class="main-content">
+     
+     <!-- Detalhes do Briefing -->
+     <div class="details-section">
+      <button id="backBtn" class="back-btn hidden">Voltar</button>
+        <div id="detailsContent" class="details-empty">
+          Selecione um briefing para ver os detalhes
+        </div>
+     </div>
+
+     <!-- Lista de Briefings -->
+     <div class="list-section">
+      <h3 class="section-title">Briefings Recebidos</h3>
+      <div id="list"></div> 
+     </div>
+   
    </div>
+  </div>
 </div>
 
 
