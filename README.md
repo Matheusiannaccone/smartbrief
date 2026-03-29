@@ -327,7 +327,7 @@ Isso permite:
 
 ## 🌐 Deploy
 
-(Link da aplicação)
+https://smartbrief-alpha.vercel.app/
 
 ---
 
