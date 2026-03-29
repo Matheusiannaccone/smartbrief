@@ -2,22 +2,70 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerador de Briefing</title>
   <link rel="stylesheet" href="styles/index.css">
-
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
+<div id="app">
+  <!-- HOME -->
+   <div id="homeView">
+     <div class="box">
+       <h2>Gerar Link de Briefing</h2>
 
-<div class="box">
-  <h2>Gerar Link de Briefing</h2>
-  <button id="generateLink">Gerar Link</button>
+       <div class="input-group">
+          <label for="clientName">Nome do Cliente:</label>
+          <input type="text" id="clientName" placeholder="Digite o nome do cliente">
+       </div>
 
-  <input type="text" id="link" readonly>
-  <button id="copyLink">Copiar Link</button>
-  
-  <h3>Briefings Recebidos</h3>
-  <div id="list"></div>
+       <div class="input-group">
+          <label for="responsibleName">Nome do Responsável:</label>
+          <input type="text" id="responsibleName" placeholder="Digite o nome do responsável">
+       </div>
+
+       <button id="generateLink" disabled>Gerar Link</button>
+     
+       <input type="text" id="link" readonly>
+       <button id="copyLink">Copiar Link</button>
+       
+       <h3 class="section-title">Briefings Recebidos</h3>
+       <h3 class="section-title">
+          <button id="toggleFilters" class="filter-toggle">Filtros ▼</button>
+        </h3>
+
+        <div id="filters" class="hidden">
+          <div class="filter-group">
+            <label for="filterClient">Cliente:</label>
+            <input type="text" id="filterClient" placeholder="Digite o nome do cliente">
+          </div>
+
+          <div class="filter-group">
+            <label for="filterResponsible">Responsável:</label>
+            <input type="text" id="filterResponsible" placeholder="Digite o nome do responsável">
+          </div>
+
+          <div class="filter-group">
+            <label for="filterDateFrom">Prazo de:</label>
+            <input type="date" id="filterDateFrom">
+
+            <label for="filterDateTo">até:</label>
+            <input type="date" id="filterDateTo">
+          </div>
+
+          <button id="applyFilters">Aplicar Filtros</button>
+          <button id="clearFilters">Limpar Filtros</button>
+        </div>
+       <div id="list"></div>
+     </div>
+   </div>
+
+   <div id="detailsView" class="hidden">
+    <button id="backBtn">Voltar</button>
+    <div id="detailsContent"></div>
+   </div>
 </div>
+
 
 <script type="module" src="script/index.js"></script>
 

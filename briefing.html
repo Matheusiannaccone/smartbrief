@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SmartBrief</title>
   <link rel="stylesheet" href="styles/briefing.css">
   
@@ -21,7 +22,10 @@
   <div id="form" class="hidden">
     <h2>Briefing</h2>
 
-    <label>Objetivo:</label>
+    <h3>Vamos lá! Quanto mais detalhes, melhor será o resultado.</h3>
+    <h4>O * indica campos obrigatórios</h3>
+
+    <label>Objetivo*</label>
     <select id="goal">
       <option value="">Selecione</option>
       <option>Vendas</option>
@@ -29,17 +33,38 @@
       <option>Branding</option>
     </select>
 
-    <label>Produto ou serviço:</label>
-    <input type="text" id="product">
+    <label>Qual o principal resultado esperado?*</label>
+    <select id="kpi">
+      <option value="">Selecione</option>
+      <option>Gerar vendas</option>
+      <option>Captar leads</option>
+      <option>Aumentar seguidores</option>
+      <option>Fortalecer marca</option>
+    </select>
 
-    <label>Público-alvo:</label>
-    <input type="text" id="audience">
+    <label>Produto ou serviço*</label>
+    <input type="text" id="product" placeholder="Ex: Loja de roupas femininas online">
 
-    <label>Prazo:</label>
-    <input type="date" id="deadline">
+    <label>Descreva seu produto ou serviço</label>
+    <textarea id="description" placeholder="Ex: Vendemos roupas casuais e fitness com foco em conforto e preço acessível"></textarea>
 
-    <label>Observações:</label>
-    <textarea id="notes"></textarea>
+    <label>Público-alvo*</label>
+    <input type="text" id="audience" placeholder="Ex: Mulheres, 25-40 anos, interessadas em moda">
+
+    <label>Idade média</label>
+    <input type="number" id="age" min="0" max="120" placeholder="Ex: 30">
+
+    <label>Localização</label>
+    <input type="text" id="location" placeholder="Ex: São Paulo-SP, Brasil">
+
+    <label>Prazo*</label>
+    <input type="date" id="deadline" min="">
+
+    <label>Referências (links ou exemplos)</label>
+    <textarea id="references" placeholder="Ex: https://instagram.com/marca-exemplo ou 'posts com cores neutras e minimalistas'"></textarea>
+
+    <label>Observações</label>
+    <textarea id="notes" placeholder="Ex: Evitar cores muito fortes, manter identidade visual da marca"></textarea>
 
     <button id="generateSummaryBtn">Gerar resumo</button>
   </div>
@@ -48,6 +73,13 @@
   <div id="summary" class="hidden">
     <h2>Resumo do Briefing</h2>
     <div class="summary" id="summaryText"></div>
+
+    <div id="deadlineWarning" class="warning-box hidden"></div>
+    
+    <h3>Qualidade do Briefing</h3>
+    <div class="score-box" id="scoreBox">0</div>
+
+    <div id="scoreWarnig" class="warning-box hidden"></div>
 
     <p>Isso está correto?</p>
     <button id="confirmBtn">Sim</button>
